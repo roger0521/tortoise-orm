@@ -12,10 +12,7 @@ app.include_router(UserRouter, tags=["User"])
 ######################################
 
 ######## Connect to Dababase  ########
-register_tortoise(
-    app,
-    config=TORTOISE_ORM,
-    generate_schemas=True,
-    add_exception_handlers=True,
-)
+print("Connect")
+print(TORTOISE_ORM)
+register_tortoise(app, config=TORTOISE_ORM, generate_schemas=True, add_exception_handlers=True)
 ######################################

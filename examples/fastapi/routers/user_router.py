@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException, APIRouter
 from tortoise.contrib.fastapi import HTTPNotFoundError
 from typing import List
+import os
 
 ###### Intialize Router ######
 router = APIRouter()
@@ -20,6 +21,8 @@ async def get_users():
 @router.post("/users", response_model=User_Pydantic)
 async def create_user(user: UserIn_Pydantic):
     user_obj = await Users.create(**user.dict(exclude_unset=True))
+    print("TEEEEE")
+    print(os.environ["TORTOISE_ORM"])
     return await User_Pydantic.from_tortoise_orm(user_obj)
 
 

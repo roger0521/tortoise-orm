@@ -25,6 +25,7 @@ async def client():
 
 @pytest.mark.anyio
 async def test_create_user(client: AsyncClient):  # nosec
+    print(os.environ.get("TORTOISE_ORM"))
     response = await client.post("/users", json={"username": "admin"})
     assert response.status_code == 200, response.text
     data = response.json()
@@ -33,4 +34,5 @@ async def test_create_user(client: AsyncClient):  # nosec
     user_id = data["id"]
 
     user_obj = await Users.get(id=user_id)
+    print(user_obj.username)
     assert user_obj.id == user_id
