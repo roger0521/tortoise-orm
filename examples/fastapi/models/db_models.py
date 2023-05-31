@@ -1,8 +1,10 @@
-from tortoise import fields, models
+from tortoise import fields
 from tortoise.contrib.pydantic import pydantic_model_creator
+from tortoise import Tortoise, fields, run_async
+from tortoise.models import Model
 
 
-class Users(models.Model):
+class Users(Model):
     """
     The User model
     """
@@ -28,6 +30,18 @@ class Users(models.Model):
     class PydanticMeta:
         computed = ["full_name"]
         exclude = ["password_hash"]
+
+
+class Event(Model):
+    id = fields.IntField(pk=True)
+    name = fields.TextField()
+    datetime = fields.DatetimeField(null=True)
+
+    class Meta:
+        table = "event"
+
+    def __str__(self):
+        return self.name
 
 
 User_Pydantic = pydantic_model_creator(Users, name="User")
