@@ -3,6 +3,10 @@
 import pytest
 from asgi_lifespan import LifespanManager
 from httpx import AsyncClient
+import os
+import sys
+
+sys.path.append(os.getcwd())
 from main import app
 from models.db_models import Users
 
