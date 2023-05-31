@@ -14,8 +14,6 @@ class Status(BaseModel):
 
 @router.get("/users", response_model=List[User_Pydantic])
 async def get_users():
-    event = await Event.create(name="Test")
-    print(event.id)
     return await User_Pydantic.from_queryset(Users.all())
 
 
